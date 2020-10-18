@@ -21,7 +21,9 @@ namespace POPCORN.Classes
             string amPm = clock.AMPMString();
 
             Console.Write(hour);
+            Console.Write(":");
             Console.Write(minute);
+            Console.Write(":");
             Console.Write(second);
             Console.Write(amPm);
 
@@ -36,7 +38,9 @@ namespace POPCORN.Classes
 
                     Console.Write("\b\b\b\b\b\b\b\b\b\b");
                     Console.Write(hour);
+                    Console.Write(":");
                     Console.Write(minute);
+                    Console.Write(":");
                     Console.Write(second);
                     Console.Write(amPm);
                 }
@@ -48,6 +52,7 @@ namespace POPCORN.Classes
 
                     Console.Write("\b\b\b\b\b\b\b\b");
                     Console.Write(minute);
+                    Console.Write(":");
                     Console.Write(second);
                     Console.Write(amPm);
                 }

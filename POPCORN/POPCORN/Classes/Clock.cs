@@ -9,11 +9,11 @@ namespace POPCORN.Classes
     {
         public string HourString()
         {
-            return DateTime.Now.ToString("hh:");
+            return DateTime.Now.ToString("hh");
         }
         public string MinuteString()
         {
-            return DateTime.Now.ToString("mm:");
+            return DateTime.Now.ToString("mm");
         }
         public string SecondString()
         {
