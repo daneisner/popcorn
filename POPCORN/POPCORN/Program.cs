@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace POPCORN
 {
@@ -6,7 +7,12 @@ namespace POPCORN
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            for (int i = 0; i < 60; i++)
+            {
+                Console.WriteLine(DateTime.Now);
+                Thread.Sleep(1000);
+                Console.Clear();
+            }
         }
     }
 }
