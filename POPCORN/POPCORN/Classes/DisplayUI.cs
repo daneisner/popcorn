@@ -10,57 +10,70 @@ namespace POPCORN.Classes
         public Dictionary<string, string> Hours { get; private set; } = new Dictionary<string, string>();
         public Dictionary<string, string> Minutes { get; private set; } = new Dictionary<string, string>();
         public Dictionary<string, string> Seconds { get; private set; } = new Dictionary<string, string>();
+        public string Hour { get; set; }
+        public string Minute { get; set; }
+        public string Second { get; set; }
+        public string AmPm { get; set; }
+
+        //public DisplayUI();
+        //{}
+
 
         public void ClockDisplay()
         {
             Clock clock = new Clock();
 
-            string hour = clock.HourString();
-            string minute = clock.MinuteString();
-            string second = clock.SecondString();
-            string amPm = clock.AMPMString();
+            Hour = clock.HourString();
+            Minute = clock.MinuteString();
+            Second = clock.SecondString();
+            AmPm = clock.AMPMString();
 
-            Console.Write(hour);
+            Console.Write(Hour);
             Console.Write(":");
-            Console.Write(minute);
+            Console.Write(Minute);
             Console.Write(":");
-            Console.Write(second);
-            Console.Write(amPm);
+            Console.Write(Second);
+            Console.Write(AmPm);
 
             while (true)
             {
-                if (hour != clock.HourString())
+                if (Hour != clock.HourString())
                 {
-                    hour = clock.HourString();
-                    minute = clock.MinuteString();
-                    second = clock.SecondString();
-                    amPm = clock.AMPMString();
+                    Hour = clock.HourString();
+                    Minute = clock.MinuteString();
+                    Second = clock.SecondString();
+
+                    if(Hour == "12")
+                    {
+                        AmPm = clock.AMPMString();
+                    }
 
                     Console.Write("\b\b\b\b\b\b\b\b\b\b");
-                    Console.Write(hour);
+                    Console.Write(Hour);
                     Console.Write(":");
-                    Console.Write(minute);
+                    Console.Write(Minute);
                     Console.Write(":");
-                    Console.Write(second);
-                    Console.Write(amPm);
+                    Console.Write(Second);
+                    Console.Write(AmPm);
                 }
-                else if (minute != clock.MinuteString())
+                else if (Minute != clock.MinuteString())
                 {
-                    minute = clock.MinuteString();
-                    second = clock.SecondString();
-                    amPm = clock.AMPMString();
+                    Minute = clock.MinuteString();
+                    Second = clock.SecondString();
 
                     Console.Write("\b\b\b\b\b\b\b\b");
-                    Console.Write(minute);
+                    Console.Write(Minute);
                     Console.Write(":");
-                    Console.Write(second);
-                    Console.Write(amPm);
+                    Console.Write(Second);
+                    Console.Write(AmPm);
                 }
                 else
                 {
+                    Second = clock.SecondString();
+
                     Console.Write("\b\b\b\b\b");
-                    Console.Write(clock.SecondString());
-                    Console.Write(clock.AMPMString());
+                    Console.Write(Second);
+                    Console.Write(AmPm);
                 }
 
                 Thread.Sleep(1000);
