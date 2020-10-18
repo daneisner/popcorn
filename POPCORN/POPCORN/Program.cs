@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using POPCORN.Classes;
 
 namespace POPCORN
 {
@@ -7,12 +8,8 @@ namespace POPCORN
     {
         static void Main(string[] args)
         {
-            for (int i = 0; i < 60; i++)
-            {
-                Console.WriteLine(DateTime.Now);
-                Thread.Sleep(1000);
-                Console.Clear();
-            }
+            DisplayUI display = new DisplayUI();
+            display.ClockDisplay();
         }
     }
 }
