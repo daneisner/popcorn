@@ -31,12 +31,12 @@ namespace POPCORN.Classes
         {
             Clock clock = new Clock();
 
-            Hour = clock.HourString();
-            Minute = clock.MinuteString();
-            Second = clock.SecondString();
-            AmPm = clock.AMPMString();
+            Hour = clock.GetHour();
+            Minute = clock.GetMinute();
+            Second = clock.GetSecond();
+            AmPm = clock.GetAMPM();
 
-            
+
 
             Console.Write(Hour);
             Console.Write(":");
@@ -45,19 +45,19 @@ namespace POPCORN.Classes
             Console.Write(Second);
             Console.Write(AmPm);
 
-            while (true)
+            for (int i = 0; i < 120; i++)
             {
-                if (Hour != clock.HourString())
-                {
+                //if (Hour != clock.GetHour())
+                //{
                     Console.SetCursorPosition(0, 0);
 
-                    Hour = clock.HourString();
-                    Minute = clock.MinuteString();
-                    Second = clock.SecondString();
+                    Hour = clock.GetHour();
+                    Minute = clock.GetMinute();
+                    Second = clock.GetSecond();
 
                     if (Hour == "12")
                     {
-                        AmPm = clock.AMPMString();
+                        AmPm = clock.GetAMPM();
                     }
 
                     Console.Write(Hour);
@@ -66,28 +66,28 @@ namespace POPCORN.Classes
                     Console.Write(":");
                     Console.Write(Second);
                     Console.Write(AmPm);
-                }
-                else if (Minute != clock.MinuteString())
-                {
-                    Console.SetCursorPosition(3, 0);
+                //}
+                //else if (Minute != clock.GetMinute())
+                //{
+                //    Console.SetCursorPosition(3, 0);
 
-                    Minute = clock.MinuteString();
-                    Second = clock.SecondString();
+                //    Minute = clock.GetMinute();
+                //    Second = clock.GetSecond();
 
-                    Console.Write(Minute);
-                    Console.Write(":");
-                    Console.Write(Second);
-                    Console.Write(AmPm);
-                }
-                else
-                {
-                    Console.SetCursorPosition(6, 0);
+                //    Console.Write(Minute);
+                //    Console.Write(":");
+                //    Console.Write(Second);
+                //    Console.Write(AmPm);
+                //}
+                //else
+                //{
+                //    Console.SetCursorPosition(6, 0);
 
-                    Second = clock.SecondString();
+                //    Second = clock.GetSecond();
 
-                    Console.Write(Second);
-                    Console.Write(AmPm);
-                }
+                //    Console.Write(Second);
+                //    Console.Write(AmPm);
+                //}
 
                 Thread.Sleep(1000);
             }
@@ -95,13 +95,37 @@ namespace POPCORN.Classes
 
         public void CallPopcorn()
         {
-            while (true)
+            for (int i = 0; i < 120; i++)
             {
-                Console.Beep();
+                try
+                {
+                    if (int.Parse(Second) % 10 == 0)
+                    {
+                        Console.Clear();
+                        Console.WriteLine();
+                        Console.Write("At ");
+                        Console.Write("the ");
+                        Console.Write("tone ");
+                        Console.Write($"{CurrentTimeZone} ");
+                        Console.Write("will ");
+                        Console.Write("be ");
+                        Console.Write($"{Hours[Hour]} ");
+                        Console.Write($"{Minutes[Minute]} ");
+                        Console.Write($"{Seconds[Second]}.....");
+                        Console.Write("\aBeep!");
+                    }
+                }
+                catch (Exception e)
+                { }
+                Thread.Sleep(1000);
                 
+
+
+                //Console.Beep();
+
             }
-            
+
         }
-       
+
     }
 }

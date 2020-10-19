@@ -7,19 +7,19 @@ namespace POPCORN.Classes
 {
     public class Clock
     {
-        public string HourString()
+        public string GetHour()
         {
             return DateTime.Now.ToString("hh");
         }
-        public string MinuteString()
+        public string GetMinute()
         {
             return DateTime.Now.ToString("mm");
         }
-        public string SecondString()
+        public string GetSecond()
         {
             return DateTime.Now.ToString("ss");
         }
-        public string AMPMString()
+        public string GetAMPM()
         {
             return DateTime.Now.ToString(" tt");
         }
