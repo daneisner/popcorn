@@ -10,13 +10,21 @@ namespace POPCORN.Classes
         public Dictionary<string, string> Hours { get; private set; } = new Dictionary<string, string>();
         public Dictionary<string, string> Minutes { get; private set; } = new Dictionary<string, string>();
         public Dictionary<string, string> Seconds { get; private set; } = new Dictionary<string, string>();
-        public string Hour { get; set; }
-        public string Minute { get; set; }
-        public string Second { get; set; }
-        public string AmPm { get; set; }
+        public string Hour { get; private set; }
+        public string Minute { get; private set; }
+        public string Second { get; private set; }
+        public string AmPm { get; private set; }
+        private TimeZoneInfo TimeZone { get; set; } = TimeZoneInfo.Local;
+        public string CurrentTimeZone { get; set; }
 
-        //public DisplayUI();
-        //{}
+        public DisplayUI()
+        {
+            Hours = FileIO.ReadTime("hours.csv");
+            Minutes = FileIO.ReadTime("minutes.csv");
+            Seconds = FileIO.ReadTime("seconds.csv");
+
+            CurrentTimeZone = TimeZone.ToString();
+        }
 
 
         public void ClockDisplay()
@@ -27,6 +35,8 @@ namespace POPCORN.Classes
             Minute = clock.MinuteString();
             Second = clock.SecondString();
             AmPm = clock.AMPMString();
+
+            
 
             Console.Write(Hour);
             Console.Write(":");
@@ -39,16 +49,17 @@ namespace POPCORN.Classes
             {
                 if (Hour != clock.HourString())
                 {
+                    Console.SetCursorPosition(0, 0);
+
                     Hour = clock.HourString();
                     Minute = clock.MinuteString();
                     Second = clock.SecondString();
 
-                    if(Hour == "12")
+                    if (Hour == "12")
                     {
                         AmPm = clock.AMPMString();
                     }
 
-                    Console.Write("\b\b\b\b\b\b\b\b\b\b");
                     Console.Write(Hour);
                     Console.Write(":");
                     Console.Write(Minute);
@@ -58,10 +69,11 @@ namespace POPCORN.Classes
                 }
                 else if (Minute != clock.MinuteString())
                 {
+                    Console.SetCursorPosition(3, 0);
+
                     Minute = clock.MinuteString();
                     Second = clock.SecondString();
 
-                    Console.Write("\b\b\b\b\b\b\b\b");
                     Console.Write(Minute);
                     Console.Write(":");
                     Console.Write(Second);
@@ -69,9 +81,10 @@ namespace POPCORN.Classes
                 }
                 else
                 {
+                    Console.SetCursorPosition(6, 0);
+
                     Second = clock.SecondString();
 
-                    Console.Write("\b\b\b\b\b");
                     Console.Write(Second);
                     Console.Write(AmPm);
                 }
@@ -79,5 +92,16 @@ namespace POPCORN.Classes
                 Thread.Sleep(1000);
             }
         }
+
+        public void CallPopcorn()
+        {
+            while (true)
+            {
+                Console.Beep();
+                
+            }
+            
+        }
+       
     }
 }

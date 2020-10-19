@@ -5,7 +5,7 @@ using System.Text;
 
 namespace POPCORN.Classes
 {
-    public abstract class FileIO
+    public static class FileIO
     {
         /// <summary>
         /// Private method for several FileIO methods that need to determine the full path, assumes files go in the current directory.

@@ -8,8 +8,23 @@ namespace POPCORN
     {
         static void Main(string[] args)
         {
-            DisplayUI display = new DisplayUI();
-            display.ClockDisplay();
+            try
+            {
+                DisplayUI display = new DisplayUI();
+                //ThreadStart clockThread = new ThreadStart(display.ClockDisplay);
+                Thread clock = new Thread(new ThreadStart(display.ClockDisplay));
+                clock.Start();
+
+                Thread popcorn = new Thread(new ThreadStart(display.CallPopcorn));
+                popcorn.Start();
+
+                
+            }
+            catch
+            {
+                Console.WriteLine("Exception!!!");
+                
+            }
         }
     }
 }
