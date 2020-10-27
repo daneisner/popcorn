@@ -12,11 +12,12 @@ namespace POPCORN
             {
                 DisplayUI display = new DisplayUI();
                 //ThreadStart clockThread = new ThreadStart(display.ClockDisplay);
-                Thread clock = new Thread(new ThreadStart(display.ClockDisplay));
-                clock.Start();
+                //Thread clock = new Thread(new ThreadStart(display.ClockDisplay));
+                //clock.Start();
 
-                Thread popcorn = new Thread(new ThreadStart(display.CallPopcorn));
-                popcorn.Start();
+                //Thread popcorn = new Thread(new ThreadStart(display.CallPopcorn));
+                //popcorn.Start();
+                display.CallPopcorn();
 
                 
             }

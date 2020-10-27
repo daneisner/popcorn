@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 
 namespace POPCORN.Classes
@@ -49,23 +48,23 @@ namespace POPCORN.Classes
             {
                 //if (Hour != clock.GetHour())
                 //{
-                    Console.SetCursorPosition(0, 0);
+                Console.SetCursorPosition(0, 0);
 
-                    Hour = clock.GetHour();
-                    Minute = clock.GetMinute();
-                    Second = clock.GetSecond();
+                Hour = clock.GetHour();
+                Minute = clock.GetMinute();
+                Second = clock.GetSecond();
 
-                    if (Hour == "12")
-                    {
-                        AmPm = clock.GetAMPM();
-                    }
+                if (Hour == "12")
+                {
+                    AmPm = clock.GetAMPM();
+                }
 
-                    Console.Write(Hour);
-                    Console.Write(":");
-                    Console.Write(Minute);
-                    Console.Write(":");
-                    Console.Write(Second);
-                    Console.Write(AmPm);
+                Console.Write(Hour);
+                Console.Write(":");
+                Console.Write(Minute);
+                Console.Write(":");
+                Console.Write(Second);
+                Console.Write(AmPm);
                 //}
                 //else if (Minute != clock.GetMinute())
                 //{
@@ -95,36 +94,78 @@ namespace POPCORN.Classes
 
         public void CallPopcorn()
         {
+            int cursorFromLeft = 0;
+            int cursorFromTop = 1;
+
             for (int i = 0; i < 120; i++)
             {
                 try
                 {
                     if (int.Parse(Second) % 10 == 0)
                     {
-                        Console.Clear();
-                        Console.WriteLine();
-                        Console.Write("At ");
-                        Console.Write("the ");
-                        Console.Write("tone ");
-                        Console.Write($"{CurrentTimeZone} ");
-                        Console.Write("will ");
-                        Console.Write("be ");
-                        Console.Write($"{Hours[Hour]} ");
-                        Console.Write($"{Minutes[Minute]} ");
-                        Console.Write($"{Seconds[Second]}.....");
-                        Console.Write("\aBeep!");
+
+
+                        Console.SetCursorPosition(cursorFromLeft, cursorFromTop);
+
+                        cursorFromLeft = WriteInTheRightSpot("At ", cursorFromLeft, cursorFromTop);
+                        cursorFromLeft = WriteInTheRightSpot("the ", cursorFromLeft, cursorFromTop);
+                        cursorFromLeft = WriteInTheRightSpot("tone ", cursorFromLeft, cursorFromTop);
+                        cursorFromLeft = WriteInTheRightSpot($"{CurrentTimeZone} ", cursorFromLeft, cursorFromTop);
+                        cursorFromLeft = WriteInTheRightSpot("will ", cursorFromLeft, cursorFromTop);
+                        cursorFromLeft = WriteInTheRightSpot("be ", cursorFromLeft, cursorFromTop);
+                        cursorFromLeft = WriteInTheRightSpot($"{Hours[Hour]} ", cursorFromLeft, cursorFromTop);
+                        cursorFromLeft = WriteInTheRightSpot($"{Minutes[Minute]} ", cursorFromLeft, cursorFromTop);
+                        cursorFromLeft = WriteInTheRightSpot($"{Seconds[Second]}.....", cursorFromLeft, cursorFromTop);
+                        cursorFromLeft = WriteInTheRightSpot("\aBeep\n", cursorFromLeft, cursorFromTop);
+                        Console.Beep();
+
+                        cursorFromLeft = 0;
+                        cursorFromTop += 1;
+
+                        //Console.Clear();
+                        //Console.WriteLine();
+
+                        //Console.Write("At ");
+                        //Thread.Sleep(1000);
+                        //Console.Write("the ");
+                        //Thread.Sleep(1000);
+                        //Console.Write("tone ");
+                        //Thread.Sleep(1000);
+                        //Console.Write($"{CurrentTimeZone} ");
+                        //Thread.Sleep(1000);
+                        //Console.Write("will ");
+                        //Thread.Sleep(1000);
+                        //Console.Write("be ");
+                        //Thread.Sleep(1000);
+                        //Console.Write($"{Hours[Hour]} ");
+                        //Thread.Sleep(1000);
+                        //Console.Write($"{Minutes[Minute]} ");
+                        //Thread.Sleep(1000);
+                        //Console.Write($"{Seconds[Second]}.....");
+                        //Thread.Sleep(1000);
+                        //Console.Write("Beep!");
+                        //Console.Beep();
                     }
                 }
                 catch (Exception e)
                 { }
                 Thread.Sleep(1000);
-                
+
 
 
                 //Console.Beep();
 
             }
 
+        }
+
+        private int WriteInTheRightSpot(string popcornText, int cursorFromLeft, int cursorFromTop)
+        {
+            Console.SetCursorPosition(cursorFromLeft, cursorFromTop);
+            Console.Write(popcornText);
+            cursorFromLeft = Console.CursorLeft;
+            Thread.Sleep(750);
+            return cursorFromLeft;
         }
 
     }
