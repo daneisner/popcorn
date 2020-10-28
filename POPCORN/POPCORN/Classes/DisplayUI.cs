@@ -9,6 +9,7 @@ namespace POPCORN.Classes
         public Dictionary<string, string> Hours { get; private set; } = new Dictionary<string, string>();
         public Dictionary<string, string> Minutes { get; private set; } = new Dictionary<string, string>();
         public Dictionary<string, string> Seconds { get; private set; } = new Dictionary<string, string>();
+        public Clock Clock { get; } = new Clock();
         public string Hour { get; private set; }
         public string Minute { get; private set; }
         public string Second { get; private set; }
@@ -23,17 +24,18 @@ namespace POPCORN.Classes
             Seconds = FileIO.ReadTime("seconds.csv");
 
             CurrentTimeZone = TimeZone.ToString();
+
+
+            Hour = Clock.GetHour();
+            Minute = Clock.GetMinute();
+            Second = Clock.GetSecond();
+            AmPm = Clock.GetAMPM();
         }
 
 
         public void ClockDisplay()
         {
-            Clock clock = new Clock();
-
-            Hour = clock.GetHour();
-            Minute = clock.GetMinute();
-            Second = clock.GetSecond();
-            AmPm = clock.GetAMPM();
+            
 
 
 
@@ -50,13 +52,13 @@ namespace POPCORN.Classes
                 //{
                 Console.SetCursorPosition(0, 0);
 
-                Hour = clock.GetHour();
-                Minute = clock.GetMinute();
-                Second = clock.GetSecond();
+                //Hour = clock.GetHour();
+                //Minute = clock.GetMinute();
+                //Second = clock.GetSecond();
 
                 if (Hour == "12")
                 {
-                    AmPm = clock.GetAMPM();
+                    AmPm = Clock.GetAMPM();
                 }
 
                 Console.Write(Hour);
@@ -148,7 +150,9 @@ namespace POPCORN.Classes
                     }
                 }
                 catch (Exception e)
-                { }
+                {
+                    Console.WriteLine($"Something happened {i}");
+                }
                 Thread.Sleep(1000);
 
 
