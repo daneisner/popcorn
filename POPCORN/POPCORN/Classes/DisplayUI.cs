@@ -10,12 +10,10 @@ namespace POPCORN.Classes
         public Dictionary<string, string> Minutes { get; private set; } = new Dictionary<string, string>();
         public Dictionary<string, string> Seconds { get; private set; } = new Dictionary<string, string>();
         public Clock Clock { get; } = new Clock();
-        public string Hour { get; private set; }
-        public string Minute { get; private set; }
-        public string Second { get; private set; }
+        public string StringHour { get; private set; }
+        public string StringMinute { get; private set; }
+        public string StringSecond { get; private set; }
         public string AmPm { get; private set; }
-        private TimeZoneInfo TimeZone { get; set; } = TimeZoneInfo.Local;
-        public string CurrentTimeZone { get; set; }
 
         public DisplayUI()
         {
@@ -23,27 +21,24 @@ namespace POPCORN.Classes
             Minutes = FileIO.ReadTime("minutes.csv");
             Seconds = FileIO.ReadTime("seconds.csv");
 
-            CurrentTimeZone = TimeZone.ToString();
-
-
-            Hour = Clock.GetHour();
-            Minute = Clock.GetMinute();
-            Second = Clock.GetSecond();
+            StringHour = Clock.StringHour;
+            StringMinute = Clock.StringMinute;
+            StringSecond = Clock.StringSecond;
             AmPm = Clock.GetAMPM();
         }
 
 
         public void ClockDisplay()
         {
-            
 
 
 
-            Console.Write(Hour);
+
+            Console.Write(StringHour);
             Console.Write(":");
-            Console.Write(Minute);
+            Console.Write(StringMinute);
             Console.Write(":");
-            Console.Write(Second);
+            Console.Write(StringSecond);
             Console.Write(AmPm);
 
             for (int i = 0; i < 120; i++)
@@ -52,20 +47,20 @@ namespace POPCORN.Classes
                 //{
                 Console.SetCursorPosition(0, 0);
 
-                //Hour = clock.GetHour();
-                //Minute = clock.GetMinute();
-                //Second = clock.GetSecond();
+                StringHour = Clock.StringHour;
+                StringMinute = Clock.StringMinute;
+                StringSecond = Clock.StringSecond;
 
-                if (Hour == "12")
+                if (StringHour == "12")
                 {
                     AmPm = Clock.GetAMPM();
                 }
 
-                Console.Write(Hour);
+                Console.Write(StringHour);
                 Console.Write(":");
-                Console.Write(Minute);
+                Console.Write(StringMinute);
                 Console.Write(":");
-                Console.Write(Second);
+                Console.Write(StringSecond);
                 Console.Write(AmPm);
                 //}
                 //else if (Minute != clock.GetMinute())
@@ -99,30 +94,66 @@ namespace POPCORN.Classes
             int cursorFromLeft = 0;
             int cursorFromTop = 1;
 
+            string popcornSecond = StringSecond;
+            string popcornMinute = StringMinute;
+            string popcornHour = StringHour;
+
+
+
             for (int i = 0; i < 120; i++)
             {
+                if (Clock.IntSecond >= 0 && Clock.IntSecond < 10)
+                {
+                    popcornSecond = "10";
+                }
+                else if (Clock.IntSecond >= 10 && Clock.IntSecond < 20)
+                {
+                    popcornSecond = "20";
+                }
+                else if (Clock.IntSecond >= 20 && Clock.IntSecond < 30)
+                {
+                    popcornSecond = "30";
+                }
+                else if (Clock.IntSecond >= 30 && Clock.IntSecond < 40)
+                {
+                    popcornSecond = "40";
+                }
+                else if (Clock.IntSecond >= 40 && Clock.IntSecond < 50)
+                {
+                    popcornSecond = "50";
+                }
+                else if (Clock.IntSecond >= 50 && Clock.IntSecond < 60)
+                {
+                    popcornSecond = "00";
+                    popcornMinute = Clock.IntMinute < 59 ? (Clock.IntMinute + 1).ToString() : "00";
+                    if (Clock.IntMinute == 59)
+                    {
+                        popcornHour = (Clock.IntHour + 1).ToString();
+                    }
+                }
+
                 try
                 {
-                    if (int.Parse(Second) % 10 == 0)
+                    if (Clock.IntSecond % 10 == 0)
                     {
+                        cursorFromLeft = WriteInTheRightSpot("\aBeep\n", cursorFromLeft, cursorFromTop);
+                        Console.Beep();
 
+                        cursorFromLeft = 0;
+                        cursorFromTop += 1;
 
                         Console.SetCursorPosition(cursorFromLeft, cursorFromTop);
 
                         cursorFromLeft = WriteInTheRightSpot("At ", cursorFromLeft, cursorFromTop);
                         cursorFromLeft = WriteInTheRightSpot("the ", cursorFromLeft, cursorFromTop);
                         cursorFromLeft = WriteInTheRightSpot("tone ", cursorFromLeft, cursorFromTop);
-                        cursorFromLeft = WriteInTheRightSpot($"{CurrentTimeZone} ", cursorFromLeft, cursorFromTop);
+                        cursorFromLeft = WriteInTheRightSpot($"{Clock.CurrentTimeZone} ", cursorFromLeft, cursorFromTop);
                         cursorFromLeft = WriteInTheRightSpot("will ", cursorFromLeft, cursorFromTop);
                         cursorFromLeft = WriteInTheRightSpot("be ", cursorFromLeft, cursorFromTop);
-                        cursorFromLeft = WriteInTheRightSpot($"{Hours[Hour]} ", cursorFromLeft, cursorFromTop);
-                        cursorFromLeft = WriteInTheRightSpot($"{Minutes[Minute]} ", cursorFromLeft, cursorFromTop);
-                        cursorFromLeft = WriteInTheRightSpot($"{Seconds[Second]}.....", cursorFromLeft, cursorFromTop);
-                        cursorFromLeft = WriteInTheRightSpot("\aBeep\n", cursorFromLeft, cursorFromTop);
-                        Console.Beep();
+                        cursorFromLeft = WriteInTheRightSpot($"{Hours[popcornHour]} ", cursorFromLeft, cursorFromTop);
+                        cursorFromLeft = WriteInTheRightSpot($"{Minutes[popcornMinute]} ", cursorFromLeft, cursorFromTop);
+                        cursorFromLeft = WriteInTheRightSpot($"{Seconds[popcornSecond]}.....", cursorFromLeft, cursorFromTop);
 
-                        cursorFromLeft = 0;
-                        cursorFromTop += 1;
 
                         //Console.Clear();
                         //Console.WriteLine();
@@ -168,7 +199,7 @@ namespace POPCORN.Classes
             Console.SetCursorPosition(cursorFromLeft, cursorFromTop);
             Console.Write(popcornText);
             cursorFromLeft = Console.CursorLeft;
-            Thread.Sleep(750);
+            Thread.Sleep(850);
             return cursorFromLeft;
         }
 

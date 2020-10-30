@@ -2,26 +2,87 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using TimeZoneConverter;
 
 namespace POPCORN.Classes
 {
     public class Clock
     {
-        public string GetHour()
+        public string StringHour
         {
-            return DateTime.Now.ToString("hh");
+            get
+            {
+                return DateTime.Now.ToString("hh");
+            }
         }
-        public string GetMinute()
+
+        public int IntHour
         {
-            return DateTime.Now.ToString("mm");
+            get
+            {
+                return int.Parse(StringHour);
+            }
         }
-        public string GetSecond()
+
+        public string StringMinute
         {
-            return DateTime.Now.ToString("ss");
+            get
+            {
+                return DateTime.Now.ToString("mm");
+            }
         }
+
+        public int IntMinute
+        {
+            get
+            {
+                return int.Parse(StringMinute);
+            }
+        }
+
+        public string StringSecond
+        {
+            get
+            {
+                return DateTime.Now.ToString("ss");
+            }
+        }
+
+        public int IntSecond
+        {
+            get
+            {
+                return int.Parse(StringSecond);
+            }
+        }
+
         public string GetAMPM()
         {
             return DateTime.Now.ToString(" tt");
         }
+
+        private TimeZoneInfo TimeZone
+        {
+            get
+            {
+                return TimeZoneInfo.Local;
+            }
+        }
+        public string CurrentTimeZone
+        {
+            get
+            {
+                return TimeZone.ToString();
+            }
+        }
+
+        //public string FriendlyTimeZone
+        //{
+        //    get
+        //    {
+        //        //return TZConvert.
+        //    }
+        //}
+
     }
 }
