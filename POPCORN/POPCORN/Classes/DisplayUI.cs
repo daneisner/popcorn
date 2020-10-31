@@ -30,10 +30,6 @@ namespace POPCORN.Classes
 
         public void ClockDisplay()
         {
-
-
-
-
             Console.Write(StringHour);
             Console.Write(":");
             Console.Write(StringMinute);
@@ -43,8 +39,6 @@ namespace POPCORN.Classes
 
             for (int i = 0; i < 120; i++)
             {
-                //if (Hour != clock.GetHour())
-                //{
                 Console.SetCursorPosition(0, 0);
 
                 StringHour = Clock.StringHour;
@@ -62,28 +56,6 @@ namespace POPCORN.Classes
                 Console.Write(":");
                 Console.Write(StringSecond);
                 Console.Write(AmPm);
-                //}
-                //else if (Minute != clock.GetMinute())
-                //{
-                //    Console.SetCursorPosition(3, 0);
-
-                //    Minute = clock.GetMinute();
-                //    Second = clock.GetSecond();
-
-                //    Console.Write(Minute);
-                //    Console.Write(":");
-                //    Console.Write(Second);
-                //    Console.Write(AmPm);
-                //}
-                //else
-                //{
-                //    Console.SetCursorPosition(6, 0);
-
-                //    Second = clock.GetSecond();
-
-                //    Console.Write(Second);
-                //    Console.Write(AmPm);
-                //}
 
                 Thread.Sleep(1000);
             }
@@ -97,8 +69,6 @@ namespace POPCORN.Classes
             string popcornSecond = StringSecond;
             string popcornMinute = StringMinute;
             string popcornHour = StringHour;
-
-
 
             for (int i = 0; i < 120; i++)
             {
@@ -125,11 +95,11 @@ namespace POPCORN.Classes
                 else if (Clock.IntSecond >= 50 && Clock.IntSecond < 60)
                 {
                     popcornSecond = "00";
-                    popcornMinute = Clock.IntMinute < 59 ? (Clock.IntMinute + 1).ToString() : "00";
                     if (Clock.IntMinute == 59)
                     {
                         popcornHour = (Clock.IntHour + 1).ToString();
                     }
+                    popcornMinute = Clock.IntMinute < 59 ? (Clock.IntMinute + 1).ToString() : "00";
                 }
 
                 try
@@ -153,31 +123,6 @@ namespace POPCORN.Classes
                         cursorFromLeft = WriteInTheRightSpot($"{Hours[popcornHour]} ", cursorFromLeft, cursorFromTop);
                         cursorFromLeft = WriteInTheRightSpot($"{Minutes[popcornMinute]} ", cursorFromLeft, cursorFromTop);
                         cursorFromLeft = WriteInTheRightSpot($"{Seconds[popcornSecond]}.....", cursorFromLeft, cursorFromTop);
-
-
-                        //Console.Clear();
-                        //Console.WriteLine();
-
-                        //Console.Write("At ");
-                        //Thread.Sleep(1000);
-                        //Console.Write("the ");
-                        //Thread.Sleep(1000);
-                        //Console.Write("tone ");
-                        //Thread.Sleep(1000);
-                        //Console.Write($"{CurrentTimeZone} ");
-                        //Thread.Sleep(1000);
-                        //Console.Write("will ");
-                        //Thread.Sleep(1000);
-                        //Console.Write("be ");
-                        //Thread.Sleep(1000);
-                        //Console.Write($"{Hours[Hour]} ");
-                        //Thread.Sleep(1000);
-                        //Console.Write($"{Minutes[Minute]} ");
-                        //Thread.Sleep(1000);
-                        //Console.Write($"{Seconds[Second]}.....");
-                        //Thread.Sleep(1000);
-                        //Console.Write("Beep!");
-                        //Console.Beep();
                     }
                 }
                 catch (Exception e)
@@ -185,11 +130,6 @@ namespace POPCORN.Classes
                     Console.WriteLine($"Something happened {i}");
                 }
                 Thread.Sleep(1000);
-
-
-
-                //Console.Beep();
-
             }
 
         }
@@ -202,6 +142,5 @@ namespace POPCORN.Classes
             Thread.Sleep(850);
             return cursorFromLeft;
         }
-
     }
 }

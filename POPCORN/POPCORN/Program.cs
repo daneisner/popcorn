@@ -19,15 +19,10 @@ namespace POPCORN
 
                 Thread popcorn = new Thread(new ThreadStart(display.CallPopcorn));
                 popcorn.Start();
-
-
-
-
             }
             catch
             {
                 Console.WriteLine("Exception!!!");
-                
             }
         }
     }

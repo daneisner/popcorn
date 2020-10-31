@@ -68,6 +68,7 @@ namespace POPCORN.Classes
                 return TimeZoneInfo.Local;
             }
         }
+
         public string CurrentTimeZone
         {
             get
@@ -82,14 +83,5 @@ namespace POPCORN.Classes
                 }
             }
         }
-
-        //public string FriendlyTimeZone
-        //{
-        //    get
-        //    {
-        //        //return TZConvert.
-        //    }
-        //}
-
     }
 }
