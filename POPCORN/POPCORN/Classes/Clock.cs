@@ -72,7 +72,14 @@ namespace POPCORN.Classes
         {
             get
             {
-                return TimeZone.ToString();
+                if (TimeZone.IsDaylightSavingTime(DateTime.Now))
+                {
+                    return TimeZone.DaylightName;
+                }
+                else
+                {
+                    return TimeZone.Id;
+                }
             }
         }
 
