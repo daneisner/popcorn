@@ -97,9 +97,23 @@ namespace POPCORN.Classes
                     popcornSecond = "00";
                     if (Clock.IntMinute == 59)
                     {
-                        popcornHour = (Clock.IntHour + 1).ToString();
+                        if (Clock.IntHour + 1 < 10)
+                        {
+                            popcornHour = "0" + (Clock.IntHour + 1).ToString(); 
+                        }
+                        else
+                        {
+                            popcornHour = (Clock.IntHour + 1).ToString();
+                        }
                     }
-                    popcornMinute = Clock.IntMinute < 59 ? (Clock.IntMinute + 1).ToString() : "00";
+                    if (Clock.IntMinute > 8)
+                    {
+                        popcornMinute = Clock.IntMinute < 59 ? (Clock.IntMinute + 1).ToString() : "00"; 
+                    }
+                    else
+                    {
+                        popcornMinute = "0" + (Clock.IntMinute + 1).ToString();
+                    }
                 }
 
                 try
@@ -127,7 +141,9 @@ namespace POPCORN.Classes
                 }
                 catch (Exception e)
                 {
+                    Console.Clear();
                     Console.WriteLine($"Something happened {i}");
+                    Console.WriteLine(e.Message);
                 }
                 Thread.Sleep(1000);
             }
